@@ -16,6 +16,14 @@ def associate_token(input):
 def get_lexeme_list(file_name):
      return __file_to_lexemes(__read_file(file_name))
 
+<<<<<<< HEAD
+#Before real file handling, this is most likely temporary
+def get_lexemes_list_with_string(file_string):
+    return __file_to_lexemes(file_string)
+
+
+=======
+>>>>>>> 84e8f168f8f1cb09bf967ef49a2c6979b100e66c
 def get_last_lexeme():
     global last_lexeme
     return last_lexeme
