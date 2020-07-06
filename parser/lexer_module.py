@@ -1,6 +1,7 @@
 import re
 
 keyword_list = ["program", "var", "integer", "real", "end", "begin", "input", "output"]
+last_lexeme = ""
 
 
 # Public functions
@@ -14,6 +15,10 @@ def associate_token(input):
 #Post: returns a list of lexemes if sucessful
 def get_lexeme_list(file_name):
      return __file_to_lexemes(__read_file(file_name))
+
+def get_last_lexeme():
+    global last_lexeme
+    return last_lexeme
 
 #Private functions
 
@@ -53,6 +58,9 @@ def __assoc_token(input):
 
     if input is None:
         return ''
+
+    global last_lexeme
+    last_lexeme = input
 
     identifier = re.search(r"^[^\d\W]\w*\Z", input)
     if identifier is not None:
