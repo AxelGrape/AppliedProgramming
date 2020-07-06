@@ -12,21 +12,6 @@ def __lookahead(lexeme_list, str):
 
 
 
-
-def __match_next(lexeme_list, expected):
-    current_token = associate_token(lexeme_list.pop(0))
-    while (current_token is None):
-        global line
-        line +=1
-        current_token = associate_token(lexeme_list.pop(0))
-
-    if(current_token != expected):
-        print(f'Syntax error: Expected: {expected} found: {get_last_lexeme()} on line {line}')
-        __expected_error(expected, current_token, line)
-    else:
-        print(f'Expected: {expected} found: {current_token}')
-
-
 #Error handling
     def __expected_error(expected, found, line):
         global output_log
@@ -39,6 +24,22 @@ def __match_next(lexeme_list, expected):
         parse_ok = 0
         global output_log
         output_log += f'\n\tSEMANTIC: ID already declared: {id}'
+
+
+def __match_next(lexeme_list, expected):
+    current_token = associate_token(lexeme_list.pop(0))
+    while (current_token is None):
+        global line
+        line +=1
+        current_token = associate_token(lexeme_list.pop(0))
+
+    if(current_token != expected):
+        print(f'Syntax error: Expected: {expected} found: {get_last_lexeme()} on line {line}')
+        #__expected_error(expected, current_token, line)
+    else:
+        print(f'Expected: {expected} found: {current_token}')
+
+
 
 # Grammar rules
 
@@ -74,7 +75,8 @@ def __id_list(lexeme_list):
     lexeme_value = __lookahead(lexeme_list, "ID") #To update last_lexeme, will make this better later
     global symb_table
     if(symb_table.in_symbol_table(get_last_lexeme())):
-        __name_found_error(get_last_lexeme())
+        #__name_found_error(get_last_lexeme())
+        print("")
     elif(lexeme_value == "ID"):
         symb_table.add_to_table(get_last_lexeme(), "var")
 
