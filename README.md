@@ -6,15 +6,15 @@ En parser för Pascal som kommer kunna användas på en sida skapad med Django.
 Testkörning av systemet:
 
 Installering av Django:
-
+```
 $ sudo apt install python3-pip -y # Om pip saknas
 $ pip install django
-
+```
 
 Förutsatt att Django är installerat.
-
+```
 $ bash runscript
-
+```
 
 För att endast köra parserdelen
 
