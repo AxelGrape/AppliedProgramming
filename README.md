@@ -19,7 +19,15 @@ $ bash runscript
 
 ## Testning av endast parserdelen
 
-1: from interface_module import parse_file
 
-2: #För att parsa en fil, skriv output = parse_file(filnamn)
-   #Alla tokens som matchas skrivs ut och output blir en sträng med alla eventuella felmeddelanden. "testok1.pas" är en fil som kan testas, finns med i repo.
+```
+$ cd parser
+$ python3
+>>> from interface_module import parse_file
+```
+För att parsa en fil, skriv output = parse_file(filnamn)
+Exempel:
+```
+>>>  parse_file("testok1.pas")
+```
+Alla tokens som matchas skrivs ut och output blir en sträng med alla eventuella felmeddelanden. "testok1.pas" är en fil som kan testas, finns med i repo.
