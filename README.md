@@ -3,7 +3,20 @@ För kursen tillämpad programmering sommarterminen 2020
 
 En parser för Pascal som kommer kunna användas på en sida skapad med Django.
 
-För att köra parserdelen
+Testkörning av systemet:
+
+Installering av Django:
+
+$ sudo apt install python3-pip -y # Om pip saknas
+$ pip install django
+
+
+Förutsatt att Django är installerat.
+
+$ bash runscript
+
+
+För att endast köra parserdelen
 
 1: from interface_module import parse_file
 
