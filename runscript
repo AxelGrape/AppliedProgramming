@@ -1,0 +1,1 @@
+cd web_temp && xdg-open http://127.0.0.1:8000/ && python3 manage.py runserver
