@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import ContactForm
 import sys
-sys.path.insert(1, '../../parser/')
+sys.path.insert(1, '../parser/')
 from interface_module import parse_file_string
 
 # Create your views here.
