@@ -53,6 +53,7 @@ def __parse_program_header(lexeme_list):
     __match_next(lexeme_list, ")")
     __match_next(lexeme_list, ";")
 
+# Var part of grammar
 
 def __parse_var_part(lexeme_list):
     __match_next(lexeme_list, "var")
@@ -99,16 +100,64 @@ def __type(lexeme_list):
     global symb_table
     symb_table.update_types(type)
 
+# Stat part of grammar
 
 
+def __parse_stat_part(lexeme_list):
+    __match_next(lexeme_list, "begin")
+    __stat_list(lexeme_list)
+    __match_next(lexeme_list, "end")
+    __match_next(lexeme_list, ".")
+
+def __stat_list(lexeme_list):
+    __stat(lexeme_list)
+    if __lookahead(lexeme_list, ";"):
+        __match_next(lexeme_list, ";")
+        __stat_list(lexeme_list)
+
+def __stat(lexeme_list):
+    __assign_stat(lexeme_list)
+
+def __assign_stat(lexeme_list):
+    __match_next(lexeme_list,"ID")
+    __match_next(lexeme_list,":=")
+    __expr(lexeme_list)
+
+def __expr(lexeme_list):
+    __term(lexeme_list)
+    if __lookahead(lexeme_list, "+"):
+        __match_next(lexeme_list, "+")
+        __expr(lexeme_list)
+
+def __term(lexeme_list):
+    __factor(lexeme_list)
+    if __lookahead(lexeme_list, "*"):
+        __match_next(lexeme_list, "*")
+        __term(lexeme_list)
+
+def __factor(lexeme_list):
+    if __lookahead(lexeme_list, "("):
+        __match_next(lexeme_list, "(")
+        __expr(lexeme_list)
+        __match_next(lexeme_list, ")")
+    __operand(lexeme_list)
+
+def __operand(lexeme_list):
+    if __lookahead(lexeme_list, "ID"):
+        __match_next(lexeme_list, "ID")
+    if __lookahead(lexeme_list, "Integer"):
+        __match_next(lexeme_list, "Integer")
 
 # Public
 
 def parse(lexeme_list):
     __parse_program_header(lexeme_list)
     __parse_var_part(lexeme_list)
+    __parse_stat_part(lexeme_list)
     global symb_table
     symb_table.print_symbol_table()
+    symb_table = SymbolTable([])
+    print(f'Rest: {lexeme_list} ')
 
     if len(output_log) < 1:
         print("Parse Completed")
