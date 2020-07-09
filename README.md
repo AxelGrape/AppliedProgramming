@@ -9,7 +9,8 @@ Django krävs för att starta hemsidan, är det redan installerat så är det ba
 ## Installering av Django:
 ```
 $ sudo apt install python3-pip -y # Om pip saknas
-$ pip install django
+$ pip3 install django
+$ pip3 install django-crispy-forms
 ```
 [Mer info](https://www.howtoforge.com/tutorial/how-to-install-django-on-ubuntu/)
 ## Provkörning.
