@@ -40,7 +40,7 @@ class SymbolTable:
             if(len(s.type) < 1):
                 s.type = var_type
                 s.size = "undefined" if self.__get_var_size(var_type) == -1 else self.__get_var_size(var_type)
-                s.address
+                s.address += s.size
 
     def print_symbol_table(self):
         for s in self.symbol_list:

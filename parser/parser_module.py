@@ -13,17 +13,17 @@ def __lookahead(lexeme_list, str):
 
 
 #Error handling
-    def __expected_error(expected, found, line):
-        global output_log
-        output_log += f'\n\tExpected: {expected} found: {current_token} on line {line}'
-        global parse_ok
-        parse_ok = 0
+def __expected_error(expected, found, line):
+    global output_log
+    output_log += f'\n\tExpected: {expected} found: {found} on line {line}<br>'
+    global parse_ok
+    parse_ok = 0
 
-    def __name_found_error(id):
-        global parse_ok
-        parse_ok = 0
-        global output_log
-        output_log += f'\n\tSEMANTIC: ID already declared: {id}'
+def __name_found_error(id):
+    global parse_ok
+    parse_ok = 0
+    global output_log
+    output_log += f'\n\tSEMANTIC: ID already declared: {id}'
 
 
 def __match_next(lexeme_list, expected):
@@ -35,7 +35,7 @@ def __match_next(lexeme_list, expected):
 
     if(current_token != expected):
         print(f'Syntax error: Expected: {expected} found: {get_last_lexeme()} on line {line}')
-        #__expected_error(expected, current_token, line)
+        __expected_error(expected, current_token, line)
     else:
         print(f'Expected: {expected} found: {current_token}')
 
@@ -150,17 +150,26 @@ def __operand(lexeme_list):
 
 # Public
 
+def __init_parser():
+    global output_log
+    output_log = ""
+    global line
+    line = 0
+    symb_table = SymbolTable([])
+
 def parse(lexeme_list):
+    __init_parser()
     __parse_program_header(lexeme_list)
     __parse_var_part(lexeme_list)
     __parse_stat_part(lexeme_list)
     global symb_table
     symb_table.print_symbol_table()
-    symb_table = SymbolTable([])
+
     print(f'Rest: {lexeme_list} ')
 
+    global output_log
     if len(output_log) < 1:
-        print("Parse Completed")
+        output_log += f'\n\tParse Completed<br>'
     else:
-        print("Parse failed! See output log")
+        output_log += f'Parse failed! See output log'
     return output_log

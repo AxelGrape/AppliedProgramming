@@ -14,8 +14,13 @@ def contact(request):
         if form.is_valid():
 
             body = form.cleaned_data['body']
+            res = parse_file_string(body)
+            print(f'hello {res}')
+            return HttpResponse(f'<p>{res}</p>')
 
-            parse_file_string(body)
 
     form = ContactForm()
     return render(request, 'forms.html', {'form': form})
+
+def result(request):
+    return HttpResponse('<h1>Hello</h1>')
