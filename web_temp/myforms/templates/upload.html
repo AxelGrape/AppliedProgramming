@@ -10,22 +10,41 @@
 
 <body>
 
-    <h3> Guide </h3>
-    <p>Click the "Browse" button to select the pascal file you want to parse, then click the "Parse file" button</p>
-    <h3> Note </h3>
-    <p>Very few files can be parsed at the moment, but I'm working on expanding the grammar and including more error handling.<br> The <i>known_problems.txt</i> file have info about known issues, feel free to expand it.<br> Only clicking the "Parse file" button without choosing a file crashes the program.
-  <div class="input-group mb-3">
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" name="document" id="inputGroupFile03">
-    <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <h1 style="margin-top:40px">Pascal Parser</h1>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" name="document" id="inputGroupFile03">
+              <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+            </div>
+            <div class="input-group-prepend">
+              <button type="submit" class="btn btn-outline-secondary">Parse file</button>
+            </div>
+          </div>
+        </form>
+        <div style="margin-left:5px">
+          <h3> Guide </h3>
+          <p>Click the "Browse" button to select the pascal file you want to parse, then click the "Parse file" button</p>
+          <h3> Note </h3>
+          <p>Very few files can be parsed at the moment, but I'm working on expanding the grammar and including more error handling.<br> The <i>known_problems.txt</i> file have info about known issues, feel free to expand it.<br> Only clicking the "Parse file" button without choosing a file crashes the program.
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="input-group-prepend">
-    <button type="submit" class="btn btn-outline-secondary">Parse file</button>
+
+<footer class="page-footer font-small blue pt-4">
+
+  <div class="footer-copyright text-center py-3">Repo:
+    <a href="https://github.com/AxelGrape/AppliedProgramming"> AppliedProgramming</a>
   </div>
-    </form>
-</div>
+
+</footer>
 
 <script>
   $('#inputGroupFile03').on('change',function(){
