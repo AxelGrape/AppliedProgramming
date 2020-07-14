@@ -14,9 +14,7 @@ def contact(request):
         if form.is_valid():
 
             body = form.cleaned_data['body']
-            res = parse_file_string(body)
-            print(f'hello {res}')
-            return HttpResponse(f'<p>{res}</p>')
+            return HttpResponse(f'<p>{parse_file_string(body)}</p><br><a href="http://127.0.0.1:8000/">Gå tillbaka</a>')
 
 
     form = ContactForm()

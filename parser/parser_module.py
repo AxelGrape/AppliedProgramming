@@ -155,6 +155,7 @@ def __init_parser():
     output_log = ""
     global line
     line = 0
+    global symb_table
     symb_table = SymbolTable([])
 
 def parse(lexeme_list):

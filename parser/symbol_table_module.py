@@ -36,12 +36,17 @@ class SymbolTable:
 
     #Pre: var_type is an variable typ, e.g. Integer, Real, Boolean
     def update_types(self, var_type):
-        for s in self.symbol_list:
-            if(len(s.type) < 1):
-                s.type = var_type
-                s.size = "undefined" if self.__get_var_size(var_type) == -1 else self.__get_var_size(var_type)
-                s.address += s.size
+        i = 0
+        while i < len(self.symbol_list):
+            if(len(self.symbol_list[i].type) < 1):
+                self.symbol_list[i].type = var_type
+                self.symbol_list[i].size = "undefined" if self.__get_var_size(var_type) == -1 else self.__get_var_size(var_type)
+                if i > 0 :
+                    self.symbol_list[i].address += self.symbol_list[i].size + self.symbol_list[i-1].address
+                i += 1
+
 
     def print_symbol_table(self):
+        print(f'Name\tRole\tType\tSize\tAddress\n')
         for s in self.symbol_list:
             s.print_symbol()
