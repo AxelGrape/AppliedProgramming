@@ -4,7 +4,6 @@ from django import forms
 
 class ContactForm(forms.Form):
     body = forms.CharField(widget=forms.Textarea)
-    res = "hello"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

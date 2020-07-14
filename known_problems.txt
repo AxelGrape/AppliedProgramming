@@ -1,0 +1,5 @@
+Problem med nya raden mellan var och begin med filuppladdningen
+
+Tar inte hand om '/' och '-'
+
+Tar inte hand om fallet att ingen fil skickas med
