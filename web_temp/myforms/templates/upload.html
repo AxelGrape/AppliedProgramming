@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forms</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <h3> Guide </h3>
+    <p>Click the "Browse" button to select the pascal file you want to parse, then click the "Parse file" button</p>
+    <h3> Note </h3>
+    <p>Very few files can be parsed at the moment, but I'm working on expanding the grammar and including more error handling.<br> The <i>known_problems.txt</i> file have info about known issues, feel free to expand it.<br> Only clicking the "Parse file" button without choosing a file crashes the program.
+  <div class="input-group mb-3">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" name="document" id="inputGroupFile03">
+    <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+  </div>
+  <div class="input-group-prepend">
+    <button type="submit" class="btn btn-outline-secondary">Parse file</button>
+  </div>
+    </form>
+</div>
+
+<script>
+  $('#inputGroupFile03').on('change',function(){
+    //get the file name
+    var fileName = $(this).val();
+    //replace the "Choose a file" label
+    $(this).next('.custom-file-label').html(fileName);
+  })
+</script>
+
+</body>
+
+</html>

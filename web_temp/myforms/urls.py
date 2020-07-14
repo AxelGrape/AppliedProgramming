@@ -3,5 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.contact),
+    path('', views.upload),
+    path('upload/', views.upload),
 ]
