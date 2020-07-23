@@ -23,7 +23,13 @@ def __name_found_error(id):
     global parse_ok
     parse_ok = 0
     global output_log
-    output_log += f'\n\tSEMANTIC: ID already declared: {id}'
+    output_log += f'\n\tSEMANTIC: ID already declared: {id}\n'
+
+def __name_not_found_error(id):
+    global parse_ok
+    parse_ok = 0
+    global output_log
+    output_log += f'\n\Semantic: ID NOT declared: {id}\n'
 
 
 def __match_next(lexeme_list, expected):
@@ -76,8 +82,7 @@ def __id_list(lexeme_list):
     lexeme_value = __lookahead(lexeme_list, "ID") #To update last_lexeme, will make this better later
     global symb_table
     if(symb_table.in_symbol_table(get_last_lexeme())):
-        #__name_found_error(get_last_lexeme())
-        print("")
+        __name_found_error(get_last_lexeme())
     elif(lexeme_value == "ID"):
         symb_table.add_to_table(get_last_lexeme(), "var")
 
@@ -119,7 +124,14 @@ def __stat(lexeme_list):
     __assign_stat(lexeme_list)
 
 def __assign_stat(lexeme_list):
-    __match_next(lexeme_list,"ID")
+    if __lookahead(lexeme_list, "ID"):
+        global symb_table
+        if symb_table.in_symbol_table(get_last_lexeme()):
+            __match_next(lexeme_list,"ID")
+        else:
+            __name_not_found_error(get_last_lexeme())
+            __match_next(lexeme_list,"ID")
+
     __match_next(lexeme_list,":=")
     __expr(lexeme_list)
 
@@ -128,12 +140,19 @@ def __expr(lexeme_list):
     if __lookahead(lexeme_list, "+"):
         __match_next(lexeme_list, "+")
         __expr(lexeme_list)
+    if __lookahead(lexeme_list, "-"):
+        __match_next(lexeme_list, "-")
+        __expr(lexeme_list)
 
 def __term(lexeme_list):
     __factor(lexeme_list)
     if __lookahead(lexeme_list, "*"):
         __match_next(lexeme_list, "*")
         __term(lexeme_list)
+    if __lookahead(lexeme_list, "/"):
+        __match_next(lexeme_list, "/")
+        __term(lexeme_list)
+
 
 def __factor(lexeme_list):
     if __lookahead(lexeme_list, "("):
@@ -172,5 +191,5 @@ def parse(lexeme_list):
     if len(output_log) < 1:
         output_log += f'\n\tParse Completed<br>'
     else:
-        output_log += f'Parse failed! See output log'
+        output_log += f'\n\tParse failed! See output log'
     return output_log
