@@ -1,4 +1,5 @@
 import re
+from string_manip import add_spaces
 
 keyword_list = ["program", "var", "integer", "real", "end", "begin", "input", "output"]
 last_lexeme = ""
@@ -14,11 +15,11 @@ def associate_token(input):
 #Pre: file_name is a filename
 #Post: returns a list of lexemes if sucessful
 def get_lexeme_list(file_name):
-     return __file_to_lexemes(__read_file(file_name))
+     return list(filter(None, __file_to_lexemes(__read_file(file_name))))
 
 #Before real file handling, this is most likely temporary
 def get_lexemes_list_with_string(file_string):
-    return __file_to_lexemes(file_string)
+    return list(filter(None,__file_to_lexemes(file_string)))
 
 
 def get_last_lexeme():
@@ -49,7 +50,12 @@ def __read_file(file_name):
 #Pre: file_string is a string
 #Post: Splits the incoming string to lexemes and returns them in a list
 def __file_to_lexemes(file_string):
+    print(file_string)
+    file_string = add_spaces(file_string)
     lexeme_list = re.split('\n| +', file_string)
+
+
+    print(lexeme_list)
     lexeme_list.append('$')
     return lexeme_list
 
@@ -67,9 +73,14 @@ def __assoc_token(input):
     global last_lexeme
     last_lexeme = input
 
-    identifier = re.search(r"^[^\d\W]\w*\Z", input)
-    if identifier is not None:
-        return __is_keyword(input)
+    if(input[0].isalpha()):
+        identifier = True
+        for char in input:
+            if not char.isalnum():
+                identifier = False
+                break
+        if(identifier == True):
+            return __is_keyword(input)
 
     integer_number = re.search(r"^[-+]?([1-9]\d*|0)$", input)
     if integer_number is not None:

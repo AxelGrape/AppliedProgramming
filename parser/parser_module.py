@@ -179,6 +179,7 @@ def __init_parser():
 
 def parse(lexeme_list):
     __init_parser()
+    print(lexeme_list)
     __parse_program_header(lexeme_list)
     __parse_var_part(lexeme_list)
     __parse_stat_part(lexeme_list)
