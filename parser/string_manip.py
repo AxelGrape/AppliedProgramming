@@ -7,7 +7,6 @@ def add_spaces(source_str):
     position = 0
     while(position < len(source_str)):
         global special_character_list
-        print(source_str[position])
         if source_str[position] == ":" and source_str[position+1] == "=":
             position += 2
         else:
