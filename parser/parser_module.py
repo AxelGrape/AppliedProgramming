@@ -118,8 +118,8 @@ def __type(lexeme_list):
          __match_next(lexeme_list, "boolean")
          type = "boolean"
     print("\n*****Out type*****\n")
-    #global symb_table
-    #symb_table.update_types(type)
+    global symb_table
+    symb_table.update_types(type)
 
 # Stat part of grammar
 
