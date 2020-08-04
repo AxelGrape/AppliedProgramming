@@ -9,7 +9,8 @@ class SymbolTable:
         if(self.in_symbol_table(name)):
             return False
         else:
-            address = 0 if len(self.symbol_list) == 0 else  (self.symbol_list[-1].address + 0)
+            #address = 0 if len(self.symbol_list) == 0 else  (self.symbol_list[-1].address + 0)
+            address = 0
             self.symbol_list.append(Symbol(name, role, "", 0, address))
             return True
 
@@ -48,9 +49,9 @@ class SymbolTable:
             if((len(self.symbol_list[i].type) < 1)):
                 self.symbol_list[i].type = var_type
                 self.symbol_list[i].size = "undefined" if self.__get_var_size(var_type) == -1 else self.__get_var_size(var_type)
-                if i > 0 :
+                if i > 0 and self.symbol_list[i].address == 0:
+                    print(f'address for i-1 = [{self.symbol_list[i-1].address} and size for i = [{self.symbol_list[i].size}]\n')
                     self.symbol_list[i].address += self.symbol_list[i].size + self.symbol_list[i-1].address
-                    print("address")
             i += 1
 
 
