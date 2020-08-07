@@ -1,5 +1,6 @@
-program testok6 ( input , output ) ;
-var id , number , assign : integer ;
+program testok6(input, output);
+var id, number, assign: integer;
+
 begin
-id := ( number + assign ) * 2
-end .
+id := (number + assign) * 2  
+end.

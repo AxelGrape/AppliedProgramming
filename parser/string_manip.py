@@ -15,4 +15,5 @@ def add_spaces(source_str):
                 source_str = __insert(source_str, " ", position)  # blannk before special character
                 position +=1
             position +=1
+    source_str = source_str.replace('\r','')
     return source_str
